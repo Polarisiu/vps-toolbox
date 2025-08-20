@@ -227,7 +227,7 @@ execute_choice() {
         88)
             echo -e "${yellow}正在更新脚本...${reset}"
             # 下载最新版本覆盖本地脚本
-            curl -fsSL https://raw.githubusercontent.com/iu683/vps-tools/main/vps-toolbox.sh -o "$INSTALL_PATH"
+            curl -fsSL https://raw.githubusercontent.com/Polarisiu/vps-toolbox/main/vps-toolbox.sh -o "$INSTALL_PATH"
             if [[ $? -ne 0 ]]; then
                 echo -e "${red}更新失败，请检查网络或GitHub地址${reset}"
                 return 1

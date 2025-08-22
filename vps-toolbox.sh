@@ -70,10 +70,10 @@ SUB_MENU[2]="14 代理工具|15 FRP管理|16 BBR管理|17 TCP窗口调优|18 WAR
 SUB_MENU[3]="31 NodeQuality脚本|32 融合怪测试|33 网络质量体检脚本|34 简单回程测试|35 完整路由检测|36 流媒体解锁|37 三网延迟测速|38 检查25端口开放"
 SUB_MENU[4]="39 Docker管理|40 Docker备份恢复|41 Docker容器迁移"
 SUB_MENU[5]="42 应用管理|43 面板管理|44 哪吒管理|45 yt-dlp视频下载工具"
-SUB_MENU[6]="46 1kejiNGINX反代|47 NginxProxyManager可视化面板"
-SUB_MENU[7]="48 系统清理|49 系统备份恢复|50 本地备份|51 一键重装系统|52 系统组件|53 开发环境|54 SWAP|55 DNS管理|56 工作区管理|57 系统监控"
-SUB_MENU[8]="58 科技lion|59 老王工具箱|60 一点科技|61 VPS优化工具|62 VPS-Toolkit"
-SUB_MENU[9]="63 甲骨文工具|64 安装PVE|65 圆周率计算器|66 iperf3 "
+SUB_MENU[6]="46 1kejiNGINX反代|47 NginxProxyManager可视化面板|48 ALLinSSL证书"
+SUB_MENU[7]="49 系统清理|50 系统备份恢复|51 本地备份|52 一键重装系统|53 系统组件|54 开发环境|55 SWAP|56 DNS管理|57 工作区管理|58 系统监控"
+SUB_MENU[8]="59 科技lion|60 老王工具箱|61 一点科技|62 VPS优化工具|63 VPS-Toolkit"
+SUB_MENU[9]="64 甲骨文工具|65 安装PVE|66 圆周率计算器|67 iperf3 "
 SUB_MENU[10]="88 更新脚本|99 卸载工具箱"
 
 # 显示一级菜单
@@ -205,25 +205,26 @@ execute_choice() {
         45) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/app-store/main/ytdlb.sh) ;;
         46) bash <(curl -fsSL https://raw.githubusercontent.com/1keji/AddIPv6/main/manage_nginx_v6.sh) ;;
         47) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/panel/main/nginx.sh) ;;
-        48) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/clear.sh) ;;
-        49) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/restore.sh) ;;
-        50) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/beifen.sh) ;;
-        51) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/reinstall.sh) ;;
-        52) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/package.sh) ;;
-        53) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/exploitation.sh) ;;
-        54) wget https://www.moerats.com/usr/shell/swap.sh && bash swap.sh ;;
-        55) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/dns.sh) ;;
-        56) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/tmux.sh) ;;
-        57) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/System.sh) ;;
-        58) curl -sS -O https://kejilion.pro/kejilion.sh && chmod +x kejilion.sh && ./kejilion.sh ;;
-        59) bash <(curl -fsSL ssh_tool.eooce.com) ;;
-        60) wget -O 1keji.sh "https://www.1keji.net" && chmod +x 1keji.sh && ./1keji.sh ;;
-        61) bash <(curl -sL ss.hide.ss) ;;
-        62) bash <(curl -sSL https://raw.githubusercontent.com/zeyu8023/vps_toolkit/main/install.sh) ;;
-        63) bash <(curl -fsSL https://raw.githubusercontent.com/iu683/oracle/main/oracle.sh) ;;
-        64) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/PVE.sh) ;;
-        65) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/pai.sh) ;;
-        66) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/iperf3.sh) ;;
+        48) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/app-store/main/ALLSSL.sh) ;;
+        49) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/clear.sh) ;;
+        50) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/restore.sh) ;;
+        51) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/beifen.sh) ;;
+        52) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/reinstall.sh) ;;
+        53) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/package.sh) ;;
+        54) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/exploitation.sh) ;;
+        55) wget https://www.moerats.com/usr/shell/swap.sh && bash swap.sh ;;
+        56) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/dns.sh) ;;
+        57) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/tmux.sh) ;;
+        58) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/System.sh) ;;
+        59) curl -sS -O https://kejilion.pro/kejilion.sh && chmod +x kejilion.sh && ./kejilion.sh ;;
+        60) bash <(curl -fsSL ssh_tool.eooce.com) ;;
+        61) wget -O 1keji.sh "https://www.1keji.net" && chmod +x 1keji.sh && ./1keji.sh ;;
+        62) bash <(curl -sL ss.hide.ss) ;;
+        63) bash <(curl -sSL https://raw.githubusercontent.com/zeyu8023/vps_toolkit/main/install.sh) ;;
+        64) bash <(curl -fsSL https://raw.githubusercontent.com/iu683/oracle/main/oracle.sh) ;;
+        65) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/PVE.sh) ;;
+        66) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/pai.sh) ;;
+        67) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/iperf3.sh) ;;
         88)
             echo -e "${yellow}正在更新脚本...${reset}"
             # 下载最新版本覆盖本地脚本

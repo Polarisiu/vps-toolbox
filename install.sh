@@ -37,13 +37,34 @@ progress_bar() {
 # ----------------------
 # 检查 sudo
 # ----------------------
-progress_bar "检测 sudo权限" 0.03
-if command -v sudo &>/dev/null; then
+progress_bar "检测 sudo 权限" 0.03
+
+if [[ $EUID -eq 0 ]]; then
+  echo -e "${GREEN}当前为 root 用户，跳过 sudo 检查。${RESET}"
+elif command -v sudo &>/dev/null; then
   echo -e "${GREEN}检测到 sudo 可用。${RESET}"
 else
-  echo -e "${GREEN}未检测到 sudo，请使用 root 用户运行脚本。${RESET}"
-  exit 1
+  echo -e "${YELLOW}未检测到 sudo，正在尝试自动安装...${RESET}"
+  if [[ -f /etc/debian_version ]]; then
+    apt-get update -y && apt-get install -y sudo
+  elif [[ -f /etc/redhat-release ]]; then
+    yum install -y sudo
+  elif [[ -f /etc/alpine-release ]]; then
+    apk add sudo
+  else
+    echo -e "${RED}不支持的系统，请手动安装 sudo 后再运行脚本！${RESET}"
+    exit 1
+  fi
+
+  if command -v sudo &>/dev/null; then
+    echo -e "${GREEN}sudo 安装成功！${RESET}"
+    echo -e "${GREEN}sudo 已安装并启用，继续执行脚本...${RESET}"
+  else
+    echo -e "${RED}sudo 安装失败，请手动安装后再运行脚本！${RESET}"
+    exit 1
+  fi
 fi
+
 
 # ----------------------
 # 检测系统类型

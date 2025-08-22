@@ -73,7 +73,7 @@ SUB_MENU[5]="42 应用管理|43 面板管理|44 哪吒管理|45 yt-dlp视频下�
 SUB_MENU[6]="46 1kejiNGINX反代|47 NginxProxyManager可视化面板|48 ALLinSSL证书"
 SUB_MENU[7]="49 系统清理|50 系统备份恢复|51 本地备份|52 一键重装系统|53 系统组件|54 开发环境|55 SWAP|56 DNS管理|57 工作区管理|58 系统监控"
 SUB_MENU[8]="59 科技lion|60 老王工具箱|61 一点科技|62 VPS优化工具|63 VPS-Toolkit"
-SUB_MENU[9]="64 甲骨文工具|65 安装PVE|66 圆周率计算器|67 iperf3 "
+SUB_MENU[9]="64 甲骨文工具|65 安装PVE|66 圆周率计算器|67 PHP7.4|68 iperf3 "
 SUB_MENU[10]="88 更新脚本|99 卸载工具箱"
 
 # 显示一级菜单
@@ -224,7 +224,8 @@ execute_choice() {
         64) bash <(curl -fsSL https://raw.githubusercontent.com/iu683/oracle/main/oracle.sh) ;;
         65) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/PVE.sh) ;;
         66) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/pai.sh) ;;
-        67) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/iperf3.sh) ;;
+        67) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/php74.sh) ;;
+        68) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/iperf3.sh) ;;
         88)
             echo -e "${yellow}正在更新脚本...${reset}"
             # 下载最新版本覆盖本地脚本

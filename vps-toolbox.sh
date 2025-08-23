@@ -83,6 +83,10 @@ show_main_menu() {
     rainbow_animate "              📦 VPS 服务器工具箱 📦          "
     rainbow_animate "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     show_system_usage
+    # 当前日期时间显示在框下、菜单上
+    datetime=$(date "+%Y-%m-%d %H:%M:%S")
+    echo -e "${yellow}🕒 当前时间：${datetime}${reset}\n"
+    # 显示菜单
     for i in "${!MAIN_MENU[@]}"; do
         printf "${red}▶${reset} ${green}%02d. %s${reset}\n" "$((i+1))" "${MAIN_MENU[i]}"
     done

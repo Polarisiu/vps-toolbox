@@ -134,7 +134,7 @@ progress_bar "安装完成" 0.02
 
 echo -e "\n${GREEN}============================================================${RESET}"
 echo -e " 🎉 ${GREEN}安装/升级完成！${RESET}"
-echo -e " 👉 ${GREEN}你可以输入${RESET}${RED}m${RESET}${GREEN} 或 ${RED}M${RESET}${GREEN} 运行 IU 工具箱${RESET}"
+echo -e " 👉 ${GREEN}你可以输入 ${RESET}${RED}m${RESET}${GREEN} 或 ${RED}M${RESET}${GREEN} 运行 IU 工具箱${RESET}"
 echo -e "${GREEN}============================================================${RESET}\n"
 
 # ----------------------

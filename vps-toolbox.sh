@@ -65,7 +65,7 @@ MAIN_MENU=(
 )
 
 # 二级菜单（编号去掉前导零，显示时格式化为两位数）
-SUB_MENU[1]="1 更新系统|2 系统信息|3 修改ROOT密码|4 配置密钥登录|5 修改SSH端口|6 上海时区|7 临时禁用V6|8 开放所有端口|9 开启ROOT登录|10 更换系统源|11 DDdebian12|12 DDwindows10|13 DDNAT|14 设置中文|15 修改主机名|16 VPS重启"
+SUB_MENU[1]="1 更新系统|2 系统信息|3 修改ROOT密码|4 配置密钥登录|5 修改SSH端口|6 修改时区|7 临时禁用V6|8 开放所有端口|9 开启ROOT登录|10 更换系统源|11 DDdebian12|12 DDwindows10|13 DDNAT|14 设置中文|15 修改主机名|16 VPS重启"
 SUB_MENU[2]="17 代理工具|18 FRP管理|19 BBR管理|20 TCP窗口调优|21 WARP|22 Surge-Snell|23 3XUI|24 Hysteria2|25 Reality|26 Realm|27 GOST|28 哆啦A梦转发面板|29 极光面板|30 Alpine转发|31 自定义DNS解锁|32 DDNS|33 Alice出口"
 SUB_MENU[3]="34 NodeQuality脚本|35 融合怪测试|36 网络质量体检脚本|37 简单回程测试|38 完整路由检测|39 流媒体解锁|40 三网延迟测速|41 检查25端口开放"
 SUB_MENU[4]="42 Docker管理|43 Docker备份恢复|44 Docker容器迁移"
@@ -156,8 +156,13 @@ install_shortcut() {
 
 # 删除快捷指令
 remove_shortcut() {
-    sudo rm -f "$SHORTCUT_PATH" "$SHORTCUT_PATH_UPPER"
+    if [[ $EUID -eq 0 ]]; then
+        rm -f "$SHORTCUT_PATH" "$SHORTCUT_PATH_UPPER"
+    else
+        sudo rm -f "$SHORTCUT_PATH" "$SHORTCUT_PATH_UPPER"
+    fi
 }
+
 
 # 执行菜单选项
 execute_choice() {
@@ -167,7 +172,7 @@ execute_choice() {
         3) sudo passwd root ;;
         4) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/secretkey.sh) ;;
         5) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/sshdk.sh) ;;
-        6) timedatectl set-timezone Asia/Shanghai ;;
+        6) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/time.sh) ;;
         7) sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1 && sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1 ;;
         8) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/open_all_ports.sh) ;;
         9) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/xgroot.sh) ;;
@@ -183,9 +188,9 @@ execute_choice() {
         19) wget --no-check-certificate -O tcpx.sh https://raw.githubusercontent.com/ylx2016/Linux-NetSpeed/master/tcpx.sh && chmod +x tcpx.sh && ./tcpx.sh ;;
         20) wget http://sh.nekoneko.cloud/tools.sh -O tools.sh && bash tools.sh ;;
         21) wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh && bash menu.sh ;;
-        22) bash <(curl -L -s menu.jinqians.com) ;;
+        22) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/proxy/main/snellv5.sh) ;;
         23) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/proxy/main/3xui.sh) ;;
-        24) wget -N --no-check-certificate https://raw.githubusercontent.com/flame1ce/hysteria2-install/main/hysteria2-install-main/hy2/hysteria.sh && bash hysteria.sh ;;
+        24) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/proxy/main/Hysteria2.sh) ;;
         25) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/proxy/main/Reality.sh) ;;
         26) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/proxy/main/Realm.sh) ;;
         27) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/proxy/main/gost.sh) ;;
@@ -233,7 +238,7 @@ execute_choice() {
         69) wget -O 1keji.sh "https://www.1keji.net" && chmod +x 1keji.sh && ./1keji.sh ;;
         70) bash <(curl -sL ss.hide.ss) ;;
         71) bash <(curl -sSL https://raw.githubusercontent.com/zeyu8023/vps_toolkit/main/install.sh) ;;
-        72) bash <(curl -fsSL https://raw.githubusercontent.com/iu683/oracle/main/oracle.sh) ;;
+        72) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/oracle/main/oracle.sh) ;;
         73) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/PVE.sh) ;;
         74) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/pai.sh) ;;
         75) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/php74.sh) ;;

@@ -73,7 +73,7 @@ SUB_MENU[5]="45 应用管理|46 面板管理|47 哪吒管理|48 yt-dlp视频下�
 SUB_MENU[6]="50 NGINX反代|51 NginxProxyManager可视化面板|52 ALLinSSL证书"
 SUB_MENU[7]="53 系统清理|54 系统备份恢复|55 本地备份|56 一键重装系统|57 系统组件|58 开发环境|59 SWAP|60 DNS管理|61 工作区管理|62 系统监控|63 防火墙管理|64 Fail2ban|65 同步任务|66 定时任务"
 SUB_MENU[8]="67 科技lion|68 老王工具箱|69 一点科技|70 VPS优化工具|71 VPS-Toolkit"
-SUB_MENU[9]="72 Alpine系统管理|73 甲骨文工具|74 安装PVE|75 圆周率计算器|76 PHP7.4|77 iperf3|78 github同步|79 NAT小鸡"
+SUB_MENU[9]="72 Alpine系统管理|73 甲骨文工具|74 安装PVE|75 圆周率计算器|76 PHP7.4|77 iperf3|78 github同步|79 NAT小鸡|80 TCP自动调优|81 流量监控|82 一键组网|83 集群管理"
 SUB_MENU[10]="88 更新脚本|99 卸载工具箱"
 
 # 显示一级菜单
@@ -171,7 +171,7 @@ execute_choice() {
         3) sudo passwd root ;;
         4) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/secretkey.sh) ;;
         5) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/sshdk.sh) ;;
-        6) timedatectl set-timezone Asia/Shanghai ;;
+        6) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/time.sh) ;;
         7) sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1 && sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1 ;;
         8) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/open_all_ports.sh) ;;
         9) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/xgroot.sh) ;;
@@ -187,9 +187,9 @@ execute_choice() {
         19) wget --no-check-certificate -O tcpx.sh https://raw.githubusercontent.com/ylx2016/Linux-NetSpeed/master/tcpx.sh && chmod +x tcpx.sh && ./tcpx.sh ;;
         20) wget http://sh.nekoneko.cloud/tools.sh -O tools.sh && bash tools.sh ;;
         21) wget -N https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh && bash menu.sh ;;
-        22) bash <(curl -L -s menu.jinqians.com) ;;
+        22) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/proxy/main/snellv5.sh);;
         23) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/proxy/main/3xui.sh) ;;
-        24) wget -N --no-check-certificate https://raw.githubusercontent.com/flame1ce/hysteria2-install/main/hysteria2-install-main/hy2/hysteria.sh && bash hysteria.sh ;;
+        24) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/proxy/main/Hysteria2.sh) ;;
         25) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/proxy/main/Reality.sh) ;;
         26) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/proxy/main/Realm.sh) ;;
         27) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/proxy/main/gost.sh) ;;
@@ -238,13 +238,17 @@ execute_choice() {
         70) bash <(curl -sL ss.hide.ss) ;;
         71) bash <(curl -sSL https://raw.githubusercontent.com/zeyu8023/vps_toolkit/main/install.sh) ;;
         72) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/Alpinetool/main/Alpine.sh) ;;
-        73) bash <(curl -fsSL https://raw.githubusercontent.com/iu683/oracle/main/oracle.sh) ;;
+        73) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/oracle/main/oracle.sh) ;;
         74) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/PVE.sh) ;;
         75) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/pai.sh) ;;
         76) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/php74.sh) ;;
         77) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/iperf3.sh) ;;
         78) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/qdgit.sh) ;;
         79) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/nat.sh) ;;
+        80) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/tcpyh.sh) ;;
+        81) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/traffic.sh) ;;
+        82) bash <(curl -sL https://raw.githubusercontent.com/ceocok/c.cococ/refs/heads/main/easytier.sh) ;;
+        83) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/group.sh) ;;
         88)
             echo -e "${yellow}正在更新脚本...${reset}"
             # 下载最新版本覆盖本地脚本

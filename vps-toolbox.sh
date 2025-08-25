@@ -71,9 +71,9 @@ show_system_usage() {
     cpu_usage=$(awk -v FS=" " 'NR==1{usage=($2+$4)*100/($2+$4+$5)} END{printf "%.1f%%", usage}' /proc/stat)
 
     # ================== 系统状态 ==================
-    mem_num=${mem_percent%%%}
-    disk_num=${disk_used_percent%%%}
-    cpu_num=$(awk "BEGIN{print $cpu_usage}")
+    mem_num=${mem_percent%%%}          # 去掉百分号
+    disk_num=${disk_used_percent%%%}   # 去掉百分号
+    cpu_num=${cpu_usage%\%}            # 去掉 CPU 百分号
 
     max_level=0
     for n in $mem_num $disk_num $cpu_num; do
@@ -102,6 +102,7 @@ show_system_usage() {
     echo -e "$(pad_string "${yellow}⚙ CPU：${cpu_usage}${reset}")"
     echo -e "${yellow}└$(printf '─%.0s' $(seq 1 $width))┘${reset}\n"
 }
+
 
 
 

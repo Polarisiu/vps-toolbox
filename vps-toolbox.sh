@@ -37,6 +37,7 @@ rainbow_animate() {
 # 系统资源显示
 show_system_usage() {
     local width=36
+    local content_indent="    "  # 框内内容右移 4 个空格
     local mem_used mem_total disk_used_percent disk_total cpu_usage
 
     # 内存：兼容中文/英文系统
@@ -48,10 +49,10 @@ show_system_usage() {
     # CPU
     cpu_usage=$(awk -v FS=" " 'NR==1{usage=($2+$4)*100/($2+$4+$5)} END{printf "%.1f", usage}' /proc/stat)
 
-    # 字符串填充函数
+    # 字符串填充函数（内容右移）
     pad_string() {
         local str="$1"
-        printf "%-${width}s" "$str"
+        printf "%-${width}s" "${content_indent}${str}"
     }
 
     # 输出
@@ -61,6 +62,7 @@ show_system_usage() {
     echo -e "${yellow}$(pad_string "⚙ CPU：${cpu_usage}%")${reset}"
     echo -e "${yellow}└$(printf '─%.0s' $(seq 1 $width))┘${reset}\n"
 }
+
 
 # 一级菜单
 MAIN_MENU=(

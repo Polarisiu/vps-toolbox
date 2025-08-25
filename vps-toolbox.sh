@@ -37,15 +37,27 @@ rainbow_animate() {
 # 系统资源显示
 show_system_usage() {
     local width=36
-    mem_used=$(free -m | awk '/Mem:/ {print $3}')
-    mem_total=$(free -m | awk '/Mem:/ {print $2}')
-    disk_used_percent=$(df -h / | awk 'NR==2 {print $5}')
-    disk_total=$(df -h / | awk 'NR==2 {print $2}')
-    cpu_usage=$(grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {printf "%.1f", usage}')
-    pad_string() { local str="$1"; printf "%${width}s" "$str"; }
+    local mem_used mem_total disk_used_percent disk_total cpu_usage
+
+    # 内存：兼容中文/英文系统
+    read mem_total mem_used <<< $(LANG=C free -m | awk 'NR==2{print $2, $3}')
+
+    # 磁盘
+    read disk_total disk_used_percent <<< $(df -h / | awk 'NR==2{print $2, $5}')
+
+    # CPU
+    cpu_usage=$(awk -v FS=" " 'NR==1{usage=($2+$4)*100/($2+$4+$5)} END{printf "%.1f", usage}' /proc/stat)
+
+    # 字符串填充函数
+    pad_string() {
+        local str="$1"
+        printf "%-${width}s" "$str"
+    }
+
+    # 输出
     echo -e "${yellow}┌$(printf '─%.0s' $(seq 1 $width))┐${reset}"
     echo -e "${yellow}$(pad_string "📊 内存：${mem_used}Mi/${mem_total}Mi")${reset}"
-    echo -e "${yellow}$(pad_string "💽 磁盘：${disk_used_percent} 用 / 总 ${disk_total}")${reset}"
+    echo -e "${yellow}$(pad_string "💽 磁盘：${disk_used_percent} / 总 ${disk_total}")${reset}"
     echo -e "${yellow}$(pad_string "⚙ CPU：${cpu_usage}%")${reset}"
     echo -e "${yellow}└$(printf '─%.0s' $(seq 1 $width))┘${reset}\n"
 }

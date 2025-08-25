@@ -38,17 +38,71 @@ rainbow_animate() {
 show_system_usage() {
     local width=36
     local content_indent="    "  # 框内内容右移
-    local mem_used mem_total mem_total_g disk_used disk_total disk_used_percent cpu_usage
+    local mem_used mem_total disk_used disk_total disk_used_percent cpu_usage
 
-    # 内存：兼容中文/英文系统
+    # 颜色
+    green="\033[32m"
+    yellow="\033[33m"
+    red="\033[31m"
+    reset="\033[0m"
+
+    # 通用格式化函数
+    format_size() {
+        local size_mb=$1
+        if [ "$size_mb" -lt 1024 ]; then
+            echo "${size_mb}M"
+        else
+            awk "BEGIN{printf \"%.1fG\", $size_mb/1024}"
+        fi
+    }
+
+    # 百分比着色 + 返回等级
+    colorize_percent() {
+        local percent=$1
+        local num=${percent%%%}   # 去掉 %
+        if [ "$num" -le 60 ]; then
+            echo -e "${green}${percent}${reset}|0"
+        elif [ "$num" -le 80 ]; then
+            echo -e "${yellow}${percent}${reset}|1"
+        else
+            echo -e "${red}${percent}${reset}|2"
+        fi
+    }
+
+    # 内存
     read mem_total mem_used <<< $(LANG=C free -m | awk 'NR==2{print $2, $3}')
-    mem_total_g=$(awk "BEGIN{printf \"%.1f\", $mem_total/1024}")  # 转为G
+    mem_total_fmt=$(format_size $mem_total)
+    mem_used_fmt=$(format_size $mem_used)
+    mem_percent=$(awk "BEGIN{printf \"%.0f%%\", $mem_used*100/$mem_total}")
+    mem_res=$(colorize_percent $mem_percent)
+    mem_percent_colored=${mem_res%|*}
+    mem_level=${mem_res#*|}
 
-    # 磁盘（已用/总/百分比）
-    read disk_total disk_used disk_used_percent <<< $(df -h / | awk 'NR==2{print $2, $3, $5}')
+    # 磁盘
+    read disk_total_h disk_used_h disk_used_percent <<< $(df -m / | awk 'NR==2{print $2, $3, $5}')
+    disk_total_fmt=$(format_size $disk_total_h)
+    disk_used_fmt=$(format_size $disk_used_h)
+    disk_res=$(colorize_percent $disk_used_percent)
+    disk_percent_colored=${disk_res%|*}
+    disk_level=${disk_res#*|}
 
     # CPU
-    cpu_usage=$(awk -v FS=" " 'NR==1{usage=($2+$4)*100/($2+$4+$5)} END{printf "%.1f", usage}' /proc/stat)
+    cpu_usage=$(awk -v FS=" " 'NR==1{usage=($2+$4)*100/($2+$4+$5)} END{printf "%.1f%%", usage}' /proc/stat)
+    cpu_res=$(colorize_percent $cpu_usage)
+    cpu_usage_colored=${cpu_res%|*}
+    cpu_level=${cpu_res#*|}
+
+    # 系统状态 (取最大等级)
+    max_level=$(( mem_level > disk_level ? mem_level : disk_level ))
+    max_level=$(( cpu_level > max_level ? cpu_level : max_level ))
+
+    if [ "$max_level" -eq 0 ]; then
+        system_status="${green}系统状态：正常 ✅${reset}"
+    elif [ "$max_level" -eq 1 ]; then
+        system_status="${yellow}系统状态：警告 ⚠️${reset}"
+    else
+        system_status="${red}系统状态：危险 🔥${reset}"
+    fi
 
     # 字符串填充函数（内容右移）
     pad_string() {
@@ -58,9 +112,10 @@ show_system_usage() {
 
     # 输出
     echo -e "${yellow}┌$(printf '─%.0s' $(seq 1 $width))┐${reset}"
-    echo -e "${yellow}$(pad_string "📊 内存：${mem_used}Mi/${mem_total_g}G")${reset}"
-    echo -e "${yellow}$(pad_string "💽 磁盘：${disk_used}/${disk_total} (${disk_used_percent})")${reset}"
-    echo -e "${yellow}$(pad_string "⚙ CPU：${cpu_usage}%")${reset}"
+    echo -e "$(pad_string "${system_status}")"
+    echo -e "$(pad_string "📊 内存：${mem_used_fmt}/${mem_total_fmt} (${mem_percent_colored})")"
+    echo -e "$(pad_string "💽 磁盘：${disk_used_fmt}/${disk_total_fmt} (${disk_percent_colored})")"
+    echo -e "$(pad_string "⚙ CPU：${cpu_usage_colored}")"
     echo -e "${yellow}└$(printf '─%.0s' $(seq 1 $width))┘${reset}\n"
 }
 

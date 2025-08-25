@@ -38,14 +38,14 @@ rainbow_animate() {
 show_system_usage() {
     local width=36
     local content_indent="    "  # 框内内容右移
-    local mem_used mem_total mem_total_g disk_used_percent disk_total cpu_usage
+    local mem_used mem_total mem_total_g disk_used disk_total disk_used_percent cpu_usage
 
     # 内存：兼容中文/英文系统
     read mem_total mem_used <<< $(LANG=C free -m | awk 'NR==2{print $2, $3}')
     mem_total_g=$(awk "BEGIN{printf \"%.1f\", $mem_total/1024}")  # 转为G
 
-    # 磁盘
-    read disk_total disk_used_percent <<< $(df -h / | awk 'NR==2{print $2, $5}')
+    # 磁盘（已用/总/百分比）
+    read disk_total disk_used disk_used_percent <<< $(df -h / | awk 'NR==2{print $2, $3, $5}')
 
     # CPU
     cpu_usage=$(awk -v FS=" " 'NR==1{usage=($2+$4)*100/($2+$4+$5)} END{printf "%.1f", usage}' /proc/stat)
@@ -59,10 +59,11 @@ show_system_usage() {
     # 输出
     echo -e "${yellow}┌$(printf '─%.0s' $(seq 1 $width))┐${reset}"
     echo -e "${yellow}$(pad_string "📊 内存：${mem_used}Mi/${mem_total_g}G")${reset}"
-    echo -e "${yellow}$(pad_string "💽 磁盘：${disk_used_percent} / 总 ${disk_total}")${reset}"
+    echo -e "${yellow}$(pad_string "💽 磁盘：${disk_used}/${disk_total} (${disk_used_percent})")${reset}"
     echo -e "${yellow}$(pad_string "⚙ CPU：${cpu_usage}%")${reset}"
     echo -e "${yellow}└$(printf '─%.0s' $(seq 1 $width))┘${reset}\n"
 }
+
 
 
 # 一级菜单
@@ -86,7 +87,7 @@ SUB_MENU[3]="34 NodeQuality脚本|35 融合怪测试|36 网络质量体检脚本
 SUB_MENU[4]="42 Docker管理|43 Docker备份恢复|44 Docker容器迁移"
 SUB_MENU[5]="45 应用管理|46 面板管理|47 哪吒管理|48 yt-dlp视频下载工具|49 github镜像|50 异次元数卡"
 SUB_MENU[6]="51 NGINX反代|52 NGINX反代(支持WS)|53 NginxProxyManager可视化面板|54 ALLinSSL证书"
-SUB_MENU[7]="55 系统清理|56 系统备份恢复|57 本地备份|58 一键重装系统|59 系统组件|60 开发环境|61 添加SWAP|62 DNS管理|63 工作区管理|64 系统监控|65 防火墙管理|66 Fail2ban|67 同步任务|68 定时任务"
+SUB_MENU[7]="55 系统清理|56 系统备份恢复|57 本地备份|58 一键重装系统|59 系统组件|60 开发环境|61 SWAP|62 DNS管理|63 工作区管理|64 系统监控|65 防火墙管理|66 Fail2ban|67 同步任务|68 定时任务"
 SUB_MENU[8]="69 科技lion|70 老王工具箱|71 一点科技|72 VPS优化工具|73 VPS-Toolkit"
 SUB_MENU[9]="74 Alpine系统管理|75 甲骨文工具|76 安装PVE|77 圆周率计算器|78 PHP7.4|79 iperf3|80 github同步|81 NAT小鸡|82 TCP自动调优|83 流量监控|84 一键组网|85 集群管理"
 SUB_MENU[10]="88 更新脚本|99 卸载工具箱"

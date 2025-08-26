@@ -126,11 +126,11 @@ SUB_MENU[1]="1 更新系统|2 系统信息|3 修改ROOT密码|4 配置密钥登�
 SUB_MENU[2]="17 代理工具|18 FRP管理|19 BBR管理|20 TCP窗口调优|21 WARP|22 Surge-Snell|23 3XUI|24 Hysteria2|25 Reality|26 Realm|27 GOST|28 哆啦A梦转发面板|29 极光面板|30 Alpine转发|31 自定义DNS解锁|32 DDNS|33 Alice出口"
 SUB_MENU[3]="34 NodeQuality脚本|35 融合怪测试|36 网络质量体检脚本|37 简单回程测试|38 完整路由检测|39 流媒体解锁|40 三网延迟测速|41 检查25端口开放"
 SUB_MENU[4]="42 Docker管理|43 Docker备份恢复|44 Docker容器迁移"
-SUB_MENU[5]="45 应用管理|46 面板管理|47 哪吒管理|48 yt-dlp视频下载工具|49 github镜像|50 异次元数卡"
+SUB_MENU[5]="45 应用管理|46 面板管理|47 哪吒管理|48 yt-dlp视频下载工具|49 镜像加速|50 异次元数卡"
 SUB_MENU[6]="51 NGINX反代|52 NGINX反代(支持WS)|53 NginxProxyManager可视化面板|54 ALLinSSL证书"
 SUB_MENU[7]="55 系统清理|56 系统备份恢复|57 本地备份|58 一键重装系统|59 系统组件|60 开发环境|61 添加SWAP|62 DNS管理|63 工作区管理|64 系统监控|65 防火墙管理|66 Fail2ban|67 同步任务|68 定时任务"
 SUB_MENU[8]="69 科技lion|70 老王工具箱|71 一点科技|72 VPS优化工具|73 VPS-Toolkit"
-SUB_MENU[9]="74 Alpine系统管理|75 甲骨文工具|76 github同步|77 Docker加速|78 PHP7.4|79 iperf3|80 安装PVE|81 NAT小鸡|82 TCP自动调优|83 流量监控|84 一键组网|85 集群管理"
+SUB_MENU[9]="74 Alpine系统管理|75 甲骨文工具|76 github同步|77 集群管理|78 一键组网|79 iperf3|80 安装PVE|81 NAT小鸡|82 TCP自动调优|83 流量监控"
 SUB_MENU[10]="88 更新脚本|99 卸载工具箱"
 
 # 显示一级菜单
@@ -280,7 +280,7 @@ execute_choice() {
         46) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/panel/main/Panel.sh) ;;
         47) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/panel/main/nezha.sh) ;;
         48) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/app-store/main/ytdlb.sh) ;;
-        49) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/app-store/main/fdgit.sh) ;;
+        49) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/app-store/main/hubproxy.sh) ;;
         50) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/app-store/main/ycyk.sh) ;;
         51) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/nigxssl.sh) ;;
         52) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/Webssl.sh) ;;
@@ -308,15 +308,13 @@ execute_choice() {
         74) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/Alpinetool/main/Alpine.sh) ;;
         75) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/oracle/main/oracle.sh) ;;
         76) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/qdgit.sh) ;;
-        77) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/app-store/main/dockhub.sh) ;;
-        78) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/php74.sh) ;;
+        77) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/group.sh) ;;
+        78) bash <(curl -sL https://raw.githubusercontent.com/ceocok/c.cococ/refs/heads/main/easytier.sh) ;;
         79) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/iperf3.sh) ;;
         80) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/PVE.sh) ;;
         81) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/nat.sh) ;;
         82) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/tcpyh.sh) ;;
         83) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/traffic.sh) ;;
-        84) bash <(curl -sL https://raw.githubusercontent.com/ceocok/c.cococ/refs/heads/main/easytier.sh) ;;
-        85) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/group.sh) ;;
         88)
             echo -e "${yellow}正在更新脚本...${reset}"
             # 下载最新版本覆盖本地脚本

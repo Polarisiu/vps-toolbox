@@ -147,11 +147,11 @@ show_main_menu() {
 
     # 显示菜单
     for i in "${!MAIN_MENU[@]}"; do
-        if [[ $i -eq 8 ]]; then  # 第9项（数组索引从0开始）
-            # 只让文字黄色，符号保持原样
-            printf "▶ ${yellow}%02d. %s${reset}\n" "$((i+1))" "${MAIN_MENU[i]}"
-    else
-            # 其他项保持原来的颜色
+        if [[ $i -eq 8 ]]; then  # 第9项（索引从0开始）
+            # 符号红色，数字绿色，文字黄色
+            printf "${red}▶${reset} ${green}%02d${reset}. ${yellow}%s${reset}\n" "$((i+1))" "${MAIN_MENU[i]}"
+        else
+            # 其他项保持原来的颜色（符号红色，数字绿色，文字绿色）
             printf "${red}▶${reset} ${green}%02d. %s${reset}\n" "$((i+1))" "${MAIN_MENU[i]}"
         fi
     done

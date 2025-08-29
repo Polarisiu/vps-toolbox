@@ -82,7 +82,7 @@ show_system_usage() {
     done
 
     if [ "$max_level" -eq 0 ]; then
-        system_status="${green}系统状态：正常 ✅${reset}"
+        system_status="${green}系统状态：正常 ✔${reset}"
     elif [ "$max_level" -eq 1 ]; then
         system_status="${yellow}系统状态：警告 ⚠️${reset}"
     else
@@ -102,7 +102,13 @@ show_system_usage() {
     echo -e "$(pad_string "${yellow}⚙ CPU：${cpu_usage}${reset}")"
     echo -e "${yellow}└$(printf '─%.0s' $(seq 1 $width))┘${reset}\n"
 }
-
+    # ================== 系统信息 ==================
+    current_time=$(date "+%Y-%m-%d %H:%M:%S")
+    system_name=$(hostnamectl | grep "Operating System" | cut -d: -f2- | xargs)
+    timezone=$(timedatectl | grep "Time zone" | awk '{print $3}')
+    language=$LANG
+    cpu_arch=$(uname -m)
+    datetime=$(date "+%Y-%m-%d %H:%M:%S")
 
 
 
@@ -150,8 +156,21 @@ show_main_menu() {
 
 
     # 当前日期时间显示在框下、菜单上
-    datetime=$(date "+%Y-%m-%d %H:%M:%S")
-    echo -e "${yellow}🕒 当前时间：${datetime}${reset}\n"
+
+    # 终端宽度（可用不用）
+    term_width=$(tput cols 2>/dev/null || echo 80)
+
+    label_w=8  # 左侧标签宽度
+
+    printf "${red}%s %-*s:${yellow} %s${re}\n" "💻" $label_w "系统" "$system_name"
+    printf "${red}%s %-*s:${yellow} %s${re}\n" "🌍" $label_w "时区" "$timezone"
+    printf "${red}%s %-*s:${yellow} %s${re}\n" "🈯" $label_w "语言" "$language"
+    printf "${red}%s %-*s:${yellow} %s${re}\n" "🧩" $label_w "架构" "$cpu_arch"
+    printf "${red}%s %-*s:${yellow} %s${re}\n" "🕒" $label_w "时间" "$datetime"
+
+
+    # 绿色下划线
+    echo -e "${green}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${re}\n"
 
     # 显示菜单
     for i in "${!MAIN_MENU[@]}"; do

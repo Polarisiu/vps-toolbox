@@ -103,13 +103,33 @@ show_system_usage() {
     echo -e "${yellow}└$(printf '─%.0s' $(seq 1 $width))┘${reset}\n"
 }
     # ================== 系统信息 ==================
-    current_time=$(date "+%Y-%m-%d %H:%M:%S")
-    system_name=$(hostnamectl | grep "Operating System" | cut -d: -f2- | xargs)
-    timezone=$(timedatectl | grep "Time zone" | awk '{print $3}')
-    language=$LANG
-    cpu_arch=$(uname -m)
-    datetime=$(date "+%Y-%m-%d %H:%M:%S")
 
+# 系统名称 (优先 hostnamectl, 再退回 /etc/os-release)
+if command -v hostnamectl >/dev/null 2>&1; then
+    system_name=$(hostnamectl | awk -F': ' '/Operating System/ {print $2}')
+elif [ -f /etc/os-release ]; then
+    system_name=$(grep -E '^PRETTY_NAME=' /etc/os-release | cut -d= -f2 | tr -d '"')
+else
+    system_name=$(uname -s)  # 最兜底
+fi
+
+# 时区 (优先 timedatectl, 再退回 /etc/timezone 或 date +%Z)
+if command -v timedatectl >/dev/null 2>&1; then
+    timezone=$(timedatectl | awk '/Time zone/ {print $3}')
+elif [ -f /etc/timezone ]; then
+    timezone=$(cat /etc/timezone)
+else
+    timezone=$(date +%Z)
+fi
+
+# 语言（有些容器 LANG 为空，兜底 C.UTF-8）
+language=${LANG:-C.UTF-8}
+
+# 架构
+cpu_arch=$(uname -m)
+
+# 当前时间
+datetime=$(date "+%Y-%m-%d %H:%M:%S")
 
 
 

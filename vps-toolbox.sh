@@ -99,7 +99,7 @@ show_system_usage() {
     echo -e "$(pad_string "${system_status}")"
     echo -e "$(pad_string "${yellow}📊 内存：${mem_used_fmt}/${mem_total_fmt} (${mem_percent})${reset}")"
     echo -e "$(pad_string "${yellow}💽 磁盘：${disk_used_fmt}/${disk_total_fmt} (${disk_used_percent})${reset}")"
-    echo -e "$(pad_string "${yellow}⚙ CPU：${cpu_usage}${reset}")"
+    echo -e "$(pad_string "${yellow} ⚙ CPU ：${cpu_usage}${reset}")"
     echo -e "${yellow}└$(printf '─%.0s' $(seq 1 $width))┘${reset}\n"
 }
     # ================== 系统信息 ==================

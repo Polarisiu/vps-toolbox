@@ -371,7 +371,7 @@ execute_choice() {
         82) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/tcpyh.sh) ;;
         83) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/vpsxin.sh) ;;
         84) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/network.sh) ;;
-        84) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/dll.sh) ;;
+        85) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/dll.sh) ;;
         88)
             echo -e "${yellow}正在更新脚本...${reset}"
             # 下载最新版本覆盖本地脚本

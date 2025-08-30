@@ -156,7 +156,7 @@ SUB_MENU[5]="45 应用管理|46 面板管理|47 哪吒管理|48 yt-dlp视频下�
 SUB_MENU[6]="51 NGINX反代|52 NGINX反代(支持WS)|53 NginxProxyManager可视化面板|54 ALLinSSL证书"
 SUB_MENU[7]="55 系统清理|56 系统备份恢复|57 本地备份|58 一键重装系统|59 系统组件|60 开发环境|61 添加SWAP|62 DNS管理|63 工作区管理|64 系统监控|65 防火墙管理|66 Fail2ban|67 同步任务|68 定时任务"
 SUB_MENU[8]="69 科技lion|70 老王工具箱|71 一点科技|72 VPS优化工具|73 VPS-Toolkit"
-SUB_MENU[9]="74 Alpine系统管理|75 甲骨文工具|76 github同步|77 集群管理|78 一键组网|79 iperf3|80 流量监控|81 NAT小鸡|82 TCP自动调优|83 vps系统信息|84 vps网卡信息"
+SUB_MENU[9]="74 Alpine系统管理|75 甲骨文工具|76 github同步|77 集群管理|78 一键组网|79 iperf3|80 流量监控|81 NAT小鸡|82 TCP自动调优|83 vps系统信息|84 vps网卡信息|85 脚本短链"
 SUB_MENU[10]="88 更新脚本|99 卸载工具箱"
 
 # 显示一级菜单
@@ -371,7 +371,7 @@ execute_choice() {
         82) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/tcpyh.sh) ;;
         83) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/vpsxin.sh) ;;
         84) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/network.sh) ;;
-
+        84) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/dl.sh) ;;
         88)
             echo -e "${yellow}正在更新脚本...${reset}"
             # 下载最新版本覆盖本地脚本

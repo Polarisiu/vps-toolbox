@@ -357,7 +357,7 @@ execute_choice() {
         68) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/crontab.sh) ;;
         69) curl -sS -O https://kejilion.pro/kejilion.sh && chmod +x kejilion.sh && ./kejilion.sh ;;
         70) bash <(curl -fsSL ssh_tool.eooce.com) ;;
-        71) wget -O 1keji.sh "https://www.1keji.net" && chmod +x 1keji.sh && ./1keji.sh ;;
+        71) bash <(curl -sL kejilion.sh) ;;
         72) bash <(curl -sL ss.hide.ss) ;;
         73) bash <(curl -sSL https://raw.githubusercontent.com/zeyu8023/vps_toolkit/main/install.sh) ;;
         74) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/Alpinetool/main/Alpine.sh) ;;

@@ -401,7 +401,6 @@ execute_choice() {
             MARK_FILE="$HOME/.iutoolbox"
             if [[ -f "$MARK_FILE" ]]; then
             rm -f "$MARK_FILE"
-            echo -e "${green}首次运行标记文件已删除${reset}"
             fi
            echo -e "${green}卸载完成！${reset}"
            exit 0

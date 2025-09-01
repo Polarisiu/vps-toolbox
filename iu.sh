@@ -23,6 +23,11 @@ progress_bar() {
     local speed=${2:-0.03}
     local total=25
     local i
+    local GREEN="\033[32m"
+    local RED="\033[31m"
+    local CYAN="\033[36m"
+    local RESET="\033[0m"
+
     echo -ne "\n${CYAN}▶ $task...${RESET}\n"
     for ((i=1; i<=total; i++)); do
         local done_str=$(head -c $i < /dev/zero | tr '\0' '#')
@@ -30,7 +35,8 @@ progress_bar() {
         printf "\r[${GREEN}%s${RESET}${left_str}] %3d%%" "$done_str" $((i*100/total))
         sleep $speed
     done
-    echo -e " ${GREEN}✅ 完成${RESET}\n"
+    # 最后 100% 用红色，并在同一行加上 ✅ 完成
+    printf "\r[${GREEN}%s${RESET}] ${RED}100%%%s${RESET}\n" "$(head -c $total < /dev/zero | tr '\0' '#')" " ✅ 完成"
 }
 
 # ==============================
@@ -123,7 +129,7 @@ echo -e "${CYAN}============================================================${RE
 touch "$MARK_FILE"
 
 # 提示是否立即运行
-read -p $'\033[32m是否立即运行 IU 工具箱？(y/N): \033[0m' choice
+read -p $'\033[32m是否立即运行 IU 工具箱？(y/n): \033[0m' choice
 if [[ "$choice" =~ ^[Yy]$ ]]; then
     exec "$INSTALL_PATH"
 else

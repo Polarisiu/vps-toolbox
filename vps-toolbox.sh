@@ -388,11 +388,24 @@ execute_choice() {
 
         99) 
             echo -e "${yellow}正在卸载工具箱...${reset}"
+
+            # 删除快捷指令
             remove_shortcut
+ 
+            # 删除工具箱脚本
+            if [[ -f "$INSTALL_PATH" ]]; then
             rm -f "$INSTALL_PATH"
-            echo -e "${green}卸载完成！${reset}"
-            exit 0
-            ;;
+            echo -e "${green}工具箱脚本已删除${reset}"
+            fi
+            # 删除首次运行标记文件
+            MARK_FILE="$HOME/.iu_toolbox_installed"
+            if [[ -f "$MARK_FILE" ]]; then
+            rm -f "$MARK_FILE"
+            echo -e "${green}首次运行标记文件已删除${reset}"
+            fi
+           echo -e "${green}卸载完成！${reset}"
+           exit 0
+           ;;
         0) exit 0 ;;
         *) echo -e "${red}无效选项${reset}"; return 1 ;;
     esac

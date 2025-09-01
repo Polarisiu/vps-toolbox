@@ -127,5 +127,5 @@ read -p $'\033[32m是否立即运行 IU 工具箱？(y/N): \033[0m' choice
 if [[ "$choice" =~ ^[Yy]$ ]]; then
     exec "$INSTALL_PATH"
 else
-    echo -e "${GREEN}你可以稍后输入 '${RED}m${RESET}' 来运行 IU 工具箱。${RESET}\n"
+    echo -e "${GREEN}你可以稍后输入 ${RED}m${GREEN} 或 ${RED}M${GREEN} 来运行 IU 工具箱。${RESET}"
 fi

@@ -398,7 +398,7 @@ execute_choice() {
             echo -e "${green}工具箱脚本已删除${reset}"
             fi
             # 删除首次运行标记文件
-            MARK_FILE="$HOME/.iu_toolbox_installed"
+            MARK_FILE="$HOME/.iutoolbox"
             if [[ -f "$MARK_FILE" ]]; then
             rm -f "$MARK_FILE"
             echo -e "${green}首次运行标记文件已删除${reset}"

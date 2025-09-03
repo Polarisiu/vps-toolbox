@@ -7,7 +7,7 @@ Linux VPS 管理工具箱脚本，集成多种常用功能，方便快速管理�
 执行以下命令即可一键下载安装并运行工具箱：
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/vps-toolbox/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/vps-toolbox/main/iu.sh)
 ```
 
 ## 使用说明

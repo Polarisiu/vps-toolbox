@@ -150,7 +150,7 @@ MAIN_MENU=(
 # 二级菜单（编号去掉前导零，显示时格式化为两位数）
 SUB_MENU[1]="1 更新系统|2 系统信息|3 修改ROOT密码|4 配置密钥登录|5 修改SSH端口|6 修改时区|7 切换v4V6|8 开放所有端口|9 开启ROOT登录|10 更换系统源|11 DDdebian12|12 DDwindows10|13 DDNAT|14 DD飞牛|15 设置中文|16 修改主机名|17 美化命令|18 VPS重启"
 SUB_MENU[2]="19 代理工具|20 FRP管理|21 BBR管理|22 TCP窗口调优|23 WARP|24 SurgeSnell|25 3XUI|26 Hysteria2|27 Reality|28 Realm|29 GOST|30 哆啦A梦转发面板|31 极光面板|32 Alpine转发|33 自定义DNS解锁|34 DDNS|35 TCP自动调优|36 一键组网|37 流量监控|38 iperf3"
-SUB_MENU[3]="39 NodeQuality脚本|40 融合怪测试|41 YABS测试|42 网络质量体检脚本|43 简单回程测试|44 完整路由检测|45 流媒体解锁|46 三网延迟测速|47 解锁Instagram音频测试|48 检查25端口开放|49 速刷流量"
+SUB_MENU[3]="39 NodeQuality脚本|40 融合怪测试|41 YABS测试|42 网络质量体检脚本|43 简单回程测试|44 完整路由检测|45 流媒体解锁|46 三网延迟测速|47 解锁Instagram音频测试|48 检查25端口开放|49 路由追踪"
 SUB_MENU[4]="50 Docker管理|51 Docker备份恢复|52 Docker容器迁移|53 Docker反代"
 SUB_MENU[5]="54 应用管理|55 面板管理|56 监控管理|57 yt-dlp视频下载工具|58 镜像加速|59 异次元数卡|60 小雅全家桶"
 SUB_MENU[6]="61 NGINX反代|62 NginxProxyManager可视化面板|63 ALLinSSL证书"
@@ -335,7 +335,7 @@ execute_choice() {
         46) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/unblock/main/speed.sh) ;;
         47) bash <(curl -L -s check.unlock.media) -R 88 ;;
         48) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/unblock/main/Telnet.sh) ;;
-        49) curl -sL nws.sh | bash ;;
+        49) curl -sL nxtrace.org/nt | bash ;;
         50) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/app-store/main/Docker.sh) ;;
         51) curl -fsSL https://raw.githubusercontent.com/xymn2023/DMR/main/docker_back.sh -o docker_back.sh && chmod +x docker_back.sh && ./docker_back.sh ;;
         52) curl -fsSL https://raw.githubusercontent.com/shuguangnet/docker_backup_script/main/install.sh | sudo bash && docker-backup-menu ;;

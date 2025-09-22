@@ -156,7 +156,7 @@ SUB_MENU[5]="54 应用管理|55 面板管理|56 监控管理|57 yt-dlp视频下�
 SUB_MENU[6]="61 NGINX反代|62 NginxProxyManager可视化面板|63 ALLinSSL证书"
 SUB_MENU[7]="64 系统清理|65 系统备份恢复|66 本地备份|67 一键重装系统|68 系统组件|69 开发环境|70 添加SWAP|71 DNS管理|72 工作区管理|73 系统监控|74 防火墙管理|75 Fail2ban|76 远程备份|77 定时任务|78 集群管理"
 SUB_MENU[8]="79 科技lion|80 老王工具箱"
-SUB_MENU[9]="81 Alpine系统管理|82 甲骨文工具|83 github同步|84 NAT小鸡|85 vps系统信息|86 vps网卡信息|87 脚本短链|89 网站部署|90 WireGuard组网"
+SUB_MENU[9]="81 Alpine系统管理|82 甲骨文工具|83 github同步|84 NAT小鸡|85 vps系统信息|86 vps网卡信息|87 脚本短链|89 网站部署|90 WireGuard组网|91 SurgeVPS监控|92 SurgeDocker监控"
 SUB_MENU[10]="88 更新脚本|99 卸载工具箱"
 
 # 显示一级菜单
@@ -376,6 +376,8 @@ execute_choice() {
         87) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/dll.sh) ;;
         89) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/html.sh) ;;
         90) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/proxy/main/wireguard.sh) ;;
+        91) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/toy/main/ServerTraffic.sh) ;;
+        92) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/toy/main/surgedock.sh) ;;
         88)
             echo -e "${yellow}正在更新脚本...${reset}"
             # 下载最新版本覆盖本地脚本

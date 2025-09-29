@@ -150,7 +150,7 @@ MAIN_MENU=(
 # 二级菜单（编号去掉前导零，显示时格式化为两位数）
 SUB_MENU[1]="1 更新系统|2 系统信息|3 修改ROOT密码|4 配置密钥登录|5 修改SSH端口|6 修改时区|7 切换v4V6|8 开放所有端口|9 开启ROOT登录|10 更换系统源|11 DDdebian12|12 DDwindows10|13 DDNAT|14 DD飞牛|15 设置中文|16 修改主机名|17 美化命令|18 VPS重启"
 SUB_MENU[2]="19 代理工具|20 FRP管理|21 BBR管理|22 TCP窗口调优|23 WARP|24 SurgeSnell|25 3XUI|26 Hysteria2|27 Reality|28 Realm|29 GOST|30 哆啦A梦转发面板|31 极光面板|32 Alpine转发|33 自定义DNS解锁|34 DDNS|35 TCP自动调优|36 一键组网|37 流量监控|38 iperf3"
-SUB_MENU[3]="39 NodeQuality脚本|40 融合怪测试|41 YABS测试|42 网络质量体检脚本|43 简单回程测试|44 完整路由检测|45 流媒体解锁|46 三网延迟测速|47 解锁Instagram音频测试|48 检查25端口开放|49 路由追踪"
+SUB_MENU[3]="39 NodeQuality脚本|40 融合怪测试|41 YABS测试|42 网络质量体检脚本|43 简单回程测试|44 完整路由检测|45 流媒体解锁|46 三网延迟测速|47 解锁Instagram音频测试|48 检查25端口开放|49 路由追踪nexttrace"
 SUB_MENU[4]="50 Docker管理|51 Docker备份恢复|52 Docker容器迁移"
 SUB_MENU[5]="53 应用管理|54 面板管理|55 监控管理|56 yt-dlp视频下载工具|57 镜像加速|58 异次元数卡|59 小雅全家桶|60 雷池WAF"
 SUB_MENU[6]="61 NGINX反代|62 NginxProxyManager可视化面板|63 ALLinSSL证书"

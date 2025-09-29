@@ -348,7 +348,7 @@ execute_choice() {
         59) bash -c "$(curl --insecure -fsSL https://ddsrem.com/xiaoya_install.sh)" ;;
         60) bash -c "$(curl -fsSLk https://waf-ce.chaitin.cn/release/latest/manager.sh)" ;;
         61) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/Nginxws.sh) ;;
-        62) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/panel/main/nginx.sh) ;;
+        62) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/app-store/main/nginx.sh) ;;
         63) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/app-store/main/ALLSSL.sh) ;;
         64) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/clear.sh) ;;
         65) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/restore.sh) ;;

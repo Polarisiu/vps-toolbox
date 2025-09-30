@@ -39,15 +39,9 @@ show_system_usage() {
     local width=36
     local content_indent="    "
 
-    # 颜色
-    green="\033[32m"
-    yellow="\033[33m"
-    red="\033[31m"
-    reset="\033[0m"
-
     # ================== 格式化函数 ==================
     format_size() {
-        local size_mb=$1
+        local size_mb=${1:-0}  # 防止为空
         if [ "$size_mb" -lt 1024 ]; then
             echo "${size_mb}M"
         else
@@ -58,22 +52,30 @@ show_system_usage() {
     # ================== 获取数据 ==================
     # 内存
     read mem_total mem_used <<< $(LANG=C free -m | awk 'NR==2{print $2, $3}')
-    mem_total_fmt=$(format_size $mem_total)
-    mem_used_fmt=$(format_size $mem_used)
-    mem_percent=$(awk "BEGIN{printf \"%.0f%%\", $mem_used*100/$mem_total}")
+    mem_total=${mem_total:-0}
+    mem_used=${mem_used:-0}
+    mem_total_fmt=$(format_size "$mem_total")
+    mem_used_fmt=$(format_size "$mem_used")
+    mem_percent=$(awk "BEGIN{if($mem_total>0){printf \"%.0f\", $mem_used*100/$mem_total}else{print 0}}")
+    mem_percent="${mem_percent}%"  # 加回百分号显示
 
     # 磁盘
     read disk_total_h disk_used_h disk_used_percent <<< $(df -m / | awk 'NR==2{print $2, $3, $5}')
-    disk_total_fmt=$(format_size $disk_total_h)
-    disk_used_fmt=$(format_size $disk_used_h)
+    disk_total_h=${disk_total_h:-0}
+    disk_used_h=${disk_used_h:-0}
+    disk_used_percent=${disk_used_percent:-0%}
+    disk_total_fmt=$(format_size "$disk_total_h")
+    disk_used_fmt=$(format_size "$disk_used_h")
 
     # CPU
-    cpu_usage=$(awk -v FS=" " 'NR==1{usage=($2+$4)*100/($2+$4+$5)} END{printf "%.1f%%", usage}' /proc/stat)
+    # 读取 /proc/stat 第一行，计算 CPU 使用率（防止空值）
+    cpu_usage=$(awk 'NR==1{usage=($2+$4)*100/($2+$4+$5); if(usage!=""){printf "%.1f", usage}else{print 0}}' /proc/stat)
+    cpu_usage="${cpu_usage}%"  # 加回百分号显示
 
     # ================== 系统状态 ==================
-    mem_num=${mem_percent%%%}          # 去掉百分号
-    disk_num=${disk_used_percent%%%}   # 去掉百分号
-    cpu_num=${cpu_usage%\%}            # 去掉 CPU 百分号
+    mem_num=${mem_percent%\%}        # 去掉百分号
+    disk_num=${disk_used_percent%\%} # 去掉百分号
+    cpu_num=${cpu_usage%\%}          # 去掉百分号
 
     max_level=0
     for n in $mem_num $disk_num $cpu_num; do
@@ -102,6 +104,7 @@ show_system_usage() {
     echo -e "$(pad_string "${yellow} ⚙ CPU ：${cpu_usage}${reset}")"
     echo -e "${yellow}└$(printf '─%.0s' $(seq 1 $width))┘${reset}\n"
 }
+
     # ================== 系统信息 ==================
 
 # 系统名称 (优先 hostnamectl, 再退回 /etc/os-release)
@@ -337,8 +340,8 @@ execute_choice() {
         48) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/unblock/main/Telnet.sh) ;;
         49) curl -sL nxtrace.org/nt | bash ;;
         50) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/app-store/main/Docker.sh) ;;
-        51) curl -fsSL https://raw.githubusercontent.com/xymn2023/DMR/main/docker_back.sh -o docker_back.sh && chmod +x docker_back.sh && ./docker_back.sh ;;
-        52) curl -fsSL https://raw.githubusercontent.com/shuguangnet/docker_backup_script/main/install.sh | sudo bash && docker-backup-menu ;;
+        51) curl -fsSL https://raw.githubusercontent.com/shuguangnet/docker_backup_script/main/install.sh | sudo bash && docker-backup-menu ;;
+        52) curl -O https://raw.githubusercontent.com/woniu336/open_shell/main/Docker_container_migration.sh && chmod +x Docker_container_migration.sh && ./Docker_container_migration.sh ;;
         53) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/app-store/main/store.sh);;
         54) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/panel/main/Panel.sh) ;;
         55) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/app-store/main/jkgl.sh) ;;

@@ -161,7 +161,7 @@ SUB_MENU[5]="55 应用管理|56 面板管理|57 监控管理|58 视频下载工�
 SUB_MENU[6]="63 NGINX V4反代|64 NGINX V6反代|65 Caddy反代|66 NginxProxyManager面板|67 雷池WAF"
 SUB_MENU[7]="68 系统清理|69 系统备份恢复|70 本地备份|71 一键重装系统|72 系统组件|73 开发环境|74 添加SWAP|75 DNS管理|76 工作区管理|77 系统监控|78 防火墙管理|79 Fail2ban|80 远程备份|81 定时任务|82 集群管理"
 SUB_MENU[8]="83 科技lion|84 老王工具箱|85 一点科技"
-SUB_MENU[9]="86 Alpine系统管理|87 甲骨文工具|89 github同步|90 NAT小鸡|91 VPSTG通知|92 脚本短链|93 网站部署|94 随机图片API|95 卸载哪吒agent |96 卸载komari-agent"
+SUB_MENU[9]="86 Alpine系统管理|87 甲骨文工具|89 github同步|90 NAT小鸡|91 VPSTG通知|92 脚本短链|93 网站部署|94 随机图片API|95 卸载哪吒Agent |96 卸载komariAgent"
 SUB_MENU[10]="88 更新脚本|99 卸载工具箱"
 
 # 显示一级菜单

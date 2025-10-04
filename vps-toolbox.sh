@@ -18,6 +18,8 @@ reset="\033[0m"
 yellow="\033[33m"
 red="\033[31m"
 cyan="\033[36m"
+BLUE="\033[34m"
+
 
 # Ctrl+C 中断保护
 trap 'echo -e "\n${red}操作已中断${reset}"; exit 1' INT
@@ -102,7 +104,7 @@ show_system_usage() {
     echo -e "$(pad_string "${yellow}📊 内存：${mem_used_fmt}/${mem_total_fmt} (${mem_percent})${reset}")"
     echo -e "$(pad_string "${yellow}💽 磁盘：${disk_used_fmt}/${disk_total_fmt} (${disk_used_percent})${reset}")"
     echo -e "$(pad_string "${yellow} ⚙ CPU ：${cpu_usage}${reset}")"
-    echo -e "${yellow}└$(printf '─%.0s' $(seq 1 $width))┘${reset}\n"
+    echo -e "${yellow}└$(printf '─%.0s' $(seq 1 $width))┘${reset}"
 }
 
     # ================== 系统信息 ==================
@@ -143,7 +145,7 @@ MAIN_MENU=(
     "网络解锁"
     "Docker管理"
     "应用商店"
-    "证书管理"
+    "证书安全"
     "系统管理"
     "工具箱"
     "玩具熊ʕ•ᴥ•ʔ"
@@ -152,14 +154,14 @@ MAIN_MENU=(
 
 # 二级菜单（编号去掉前导零，显示时格式化为两位数）
 SUB_MENU[1]="1 更新系统|2 系统信息|3 修改ROOT密码|4 配置密钥登录|5 修改SSH端口|6 修改时区|7 切换v4V6|8 开放所有端口|9 开启ROOT登录|10 更换系统源|11 DDdebian12|12 DDwindows10|13 DDNAT|14 DD飞牛|15 设置中文|16 修改主机名|17 美化命令|18 VPS重启"
-SUB_MENU[2]="19 代理工具|20 FRP管理|21 BBR管理|22 TCP窗口调优|23 WARP|24 SurgeSnell|25 3XUI|26 Hysteria2|27 Reality|28 Realm|29 GOST|30 哆啦A梦转发面板|31 极光面板|32 Alpine转发|33 自定义DNS解锁|34 DDNS|35 TCP自动调优|36 一键组网|37 流量监控|38 iperf3"
-SUB_MENU[3]="39 NodeQuality脚本|40 融合怪测试|41 YABS测试|42 网络质量体检脚本|43 简单回程测试|44 完整路由检测|45 流媒体解锁|46 三网延迟测速|47 解锁Instagram音频测试|48 检查25端口开放|49 路由追踪nexttrace"
-SUB_MENU[4]="50 Docker管理|51 Docker备份恢复|52 Docker容器迁移"
-SUB_MENU[5]="53 应用管理|54 面板管理|55 监控管理|56 yt-dlp视频下载工具|57 镜像加速|58 异次元数卡|59 小雅全家桶|60 雷池WAF"
-SUB_MENU[6]="61 NGINX反代|62 NginxProxyManager可视化面板|63 ALLinSSL证书"
-SUB_MENU[7]="64 系统清理|65 系统备份恢复|66 本地备份|67 一键重装系统|68 系统组件|69 开发环境|70 添加SWAP|71 DNS管理|72 工作区管理|73 系统监控|74 防火墙管理|75 Fail2ban|76 远程备份|77 定时任务|78 集群管理"
-SUB_MENU[8]="79 科技lion|80 老王工具箱|81 一点科技"
-SUB_MENU[9]="82 Alpine系统管理|83 甲骨文工具|84 github同步|85 NAT小鸡|86 WireGuard组网|87 VPSTG通知|89 脚本短链|90 网站部署|91 随机图片API"
+SUB_MENU[2]="19 代理工具|20 FRP管理|21 BBR管理|22 TCP窗口调优|23 WARP|24 SurgeSnell|25 3XUI|26 Hysteria2|27 Reality|28 Realm|29 GOST|30 哆啦A梦转发面板|31 极光面板|32 Xboard|33 WireGuard组网|34 自定义DNS解锁|35 DDNS|36 TCP自动调优|37 一键组网|38 流量监控|39 iperf3"
+SUB_MENU[3]="40 NodeQuality脚本|41 融合怪测试|42 YABS测试|43 网络质量体检脚本|44 简单回程测试|45 完整路由检测|46 流媒体解锁|47 三网延迟测速|48 解锁Instagram音频测试|49 检查25端口开放|50 路由追踪nexttrace"
+SUB_MENU[4]="51 Docker管理|52 DockerCompose管理|53 DockerCompose备份恢复|54 Docker备份恢复"
+SUB_MENU[5]="55 应用管理|56 面板管理|57 监控管理|58 视频下载工具|59 镜像加速|60 异次元数卡|61 小雅全家桶|62 qbittorrent"
+SUB_MENU[6]="63 NGINX V4反代|64 NGINX V6反代|65 Caddy反代|66 NginxProxyManager面板|67 雷池WAF"
+SUB_MENU[7]="68 系统清理|69 系统备份恢复|70 本地备份|71 一键重装系统|72 系统组件|73 开发环境|74 添加SWAP|75 DNS管理|76 工作区管理|77 系统监控|78 防火墙管理|79 Fail2ban|80 远程备份|81 定时任务|82 集群管理"
+SUB_MENU[8]="83 科技lion|84 老王工具箱|85 一点科技"
+SUB_MENU[9]="86 Alpine系统管理|87 甲骨文工具|89 github同步|90 NAT小鸡|91 VPSTG通知|92 脚本短链|93 网站部署|94 随机图片API|95 卸载哪吒agent |96 卸载komari-agent"
 SUB_MENU[10]="88 更新脚本|99 卸载工具箱"
 
 # 显示一级菜单
@@ -185,15 +187,15 @@ show_main_menu() {
 
     label_w=8  # 左侧标签宽度
 
-    printf "${red}%s %-*s:${yellow} %s${re}\n" "💻" $label_w "系统" "$system_name"
-    printf "${red}%s %-*s:${yellow} %s${re}\n" "🌍" $label_w "时区" "$timezone"
-    printf "${red}%s %-*s:${yellow} %s${re}\n" "🈯" $label_w "语言" "$language"
-    printf "${red}%s %-*s:${yellow} %s${re}\n" "🧩" $label_w "架构" "$cpu_arch"
-    printf "${red}%s %-*s:${yellow} %s${re}\n" "🕒" $label_w "时间" "$datetime"
+    printf "${BLUE}%s %-*s:${BLUE} %s${re}\n" "💻" $label_w "系统" "$system_name"
+    printf "${BLUE}%s %-*s:${BLUE} %s${re}\n" "🌍" $label_w "时区" "$timezone"
+    printf "${BLUE}%s %-*s:${BLUE} %s${re}\n" "🈯" $label_w "语言" "$language"
+    printf "${BLUE}%s %-*s:${BLUE} %s${re}\n" "🧩" $label_w "架构" "$cpu_arch"
+    printf "${BLUE}%s %-*s:${BLUE} %s${re}\n" "🕒" $label_w "时间" "$datetime"
 
 
     # 绿色下划线
-    echo -e "${yellow}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${re}"
+    echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${re}"
 
     # 显示菜单
     for i in "${!MAIN_MENU[@]}"; do
@@ -205,7 +207,6 @@ show_main_menu() {
             printf "${red}▶${reset} ${green}%02d. %s${reset}\n" "$((i+1))" "${MAIN_MENU[i]}"
         fi
     done
-    echo
 }
 
 
@@ -222,7 +223,6 @@ show_sub_menu() {
             printf "${red}▶${reset} ${green}%02d %s${reset}\n" "$num" "$name"
             map+=("$num")
         done
-
         echo -ne "${red}请输入要执行的编号 ${yellow}(00返回主菜单)${yellow}：${reset}"
         read -r choice
 
@@ -321,65 +321,70 @@ execute_choice() {
         29) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/proxy/main/gost.sh) ;;
         30) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/proxy/main/dlam.sh);;
         31) bash <(curl -fsSL https://raw.githubusercontent.com/Aurora-Admin-Panel/deploy/main/install.sh) ;;
-        32) curl -sS -O https://raw.githubusercontent.com/zyxinab/iptables-manager/main/iptables-manager.sh && chmod +x iptables-manager.sh && ./iptables-manager.sh ;;
-        33) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/unlockdns.sh) ;;
-        34) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu//proxy/main/CFDDNS.sh) ;;
-        35) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/tcpyh.sh) ;;
-        36) bash <(curl -sL https://raw.githubusercontent.com/ceocok/c.cococ/refs/heads/main/easytier.sh) ;;
-        37) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/traffic.sh) ;;
-        38) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/iperf3.sh) ;;
-        39) bash <(curl -sL https://run.NodeQuality.com) ;;
-        40) curl -L https://gitlab.com/spiritysdx/za/-/raw/main/ecs.sh -o ecs.sh && chmod +x ecs.sh && bash ecs.sh ;;
-        41) curl -sL https://yabs.sh | bash ;;
-        42) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/unblock/main/examine.sh) ;;
-        43) curl https://raw.githubusercontent.com/ludashi2020/backtrace/main/install.sh -sSf | sh ;;
-        44) bash <(curl -Ls https://Net.Check.Place) -R ;;
-        45) bash <(curl -L -s https://raw.githubusercontent.com/lmc999/RegionRestrictionCheck/main/check.sh) ;;
-        46) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/unblock/main/speed.sh) ;;
-        47) bash <(curl -L -s check.unlock.media) -R 88 ;;
-        48) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/unblock/main/Telnet.sh) ;;
-        49) curl -sL nxtrace.org/nt | bash ;;
-        50) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/app-store/main/Docker.sh) ;;
-        51) curl -fsSL https://raw.githubusercontent.com/shuguangnet/docker_backup_script/main/install.sh | sudo bash && docker-backup-menu ;;
-        52) curl -O https://raw.githubusercontent.com/woniu336/open_shell/main/Docker_container_migration.sh && chmod +x Docker_container_migration.sh && ./Docker_container_migration.sh ;;
-        53) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/app-store/main/store.sh);;
-        54) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/panel/main/Panel.sh) ;;
-        55) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/app-store/main/jkgl.sh) ;;
-        56) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/app-store/main/ytdlb.sh) ;;
-        57) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/app-store/main/hubproxy.sh) ;;
-        58) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/app-store/main/ycyk.sh) ;;
-        59) bash -c "$(curl --insecure -fsSL https://ddsrem.com/xiaoya_install.sh)" ;;
-        60) bash -c "$(curl -fsSLk https://waf-ce.chaitin.cn/release/latest/manager.sh)" ;;
-        61) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/Nginxws.sh) ;;
-        62) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/app-store/main/nginx.sh) ;;
-        63) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/app-store/main/ALLSSL.sh) ;;
-        64) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/clear.sh) ;;
-        65) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/restore.sh) ;;
-        66) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/beifen.sh) ;;
-        67) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/reinstall.sh) ;;
-        68) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/package.sh) ;;
-        69) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/exploitation.sh) ;;
-        70) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/WARP.sh) ;;
-        71) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/dns.sh) ;;
-        72) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/tmux.sh) ;;
-        73) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/System.sh) ;;
-        74) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/firewall.sh) ;;
-        75) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/fail2ban.sh) ;;
-        76) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/rsynctd.sh) ;;
-        77) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/crontab.sh) ;;
-        78) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/group.sh) ;;
-        79) bash <(curl -sL kejilion.sh) ;;
-        80) bash <(curl -fsSL ssh_tool.eooce.com) ;;
-        81) wget -O 1keji.sh "https://www.1keji.net" && chmod +x 1keji.sh && ./1keji.sh ;;
-        82) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/Alpinetool/main/Alpine.sh) ;;
-        83) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/oracle/main/oracle.sh) ;;
-        84) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/qdgit.sh) ;;
-        85) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/nat.sh) ;;
-        86) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/proxy/main/wireguard.sh) ;;
-        87) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/toy/main/vpstg.sh) ;;
-        89) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/toy/main/dl.sh) ;;
-        90) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/toy/main/html.sh) ;;
-        91) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/toy/main/tuapi.sh) ;;
+        32) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/proxy/main/Xboard.sh) ;;
+        33) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/proxy/main/wireguard.sh) ;;
+        34) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/unlockdns.sh) ;;
+        35) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu//proxy/main/CFDDNS.sh) ;;
+        36) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/tcpyh.sh) ;;
+        37) bash <(curl -sL https://raw.githubusercontent.com/ceocok/c.cococ/refs/heads/main/easytier.sh) ;;
+        38) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/traffic.sh) ;;
+        39) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/iperf3.sh) ;;
+        40) bash <(curl -sL https://run.NodeQuality.com) ;;
+        41) curl -L https://gitlab.com/spiritysdx/za/-/raw/main/ecs.sh -o ecs.sh && chmod +x ecs.sh && bash ecs.sh ;;
+        42) curl -sL https://yabs.sh | bash ;;
+        43) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/unblock/main/examine.sh) ;;
+        44) curl https://raw.githubusercontent.com/ludashi2020/backtrace/main/install.sh -sSf | sh ;;
+        45) bash <(curl -Ls https://Net.Check.Place) -R ;;
+        46) bash <(curl -L -s https://raw.githubusercontent.com/lmc999/RegionRestrictionCheck/main/check.sh) ;;
+        47) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/unblock/main/speed.sh) ;;
+        48) bash <(curl -L -s check.unlock.media) -R 88 ;;
+        49) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/unblock/main/Telnet.sh) ;;
+        50) curl -sL nxtrace.org/nt | bash ;;
+        51) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/app-store/main/Docker.sh) ;;
+        52) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/app-store/main/dockercompose.sh) ;;
+        53) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/app-store/main/dockcompback.sh) ;;
+        54) curl -fsSL https://raw.githubusercontent.com/shuguangnet/docker_backup_script/main/install.sh | sudo bash && docker-backup-menu ;;
+        55) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/app-store/main/store.sh);;
+        56) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/panel/main/Panel.sh) ;;
+        57) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/app-store/main/jkgl.sh) ;;
+        58) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/app-store/main/ytdlpweb.sh) ;;
+        59) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/app-store/main/hubproxy.sh) ;;
+        60) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/app-store/main/ACGFaka.sh) ;;
+        61) bash -c "$(curl --insecure -fsSL https://ddsrem.com/xiaoya_install.sh)" ;;
+        62) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/app-store/main/qbittorrent.sh) ;;
+        63) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/ngixv4.sh) ;;
+        64) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/ngixv6.sh) ;;
+        65) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/Caddy.sh) ;;
+        66) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/app-store/main/NginxProxy.sh) ;;
+        67) bash -c "$(curl -fsSLk https://waf-ce.chaitin.cn/release/latest/manager.sh)" ;;
+        68) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/clear.sh) ;;
+        69) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/restore.sh) ;;
+        70) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/beifen.sh) ;;
+        71) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/reinstall.sh) ;;
+        72) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/package.sh) ;;
+        73) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/exploitation.sh) ;;
+        74) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/WARP.sh) ;;
+        75) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/dns.sh) ;;
+        76) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/tmux.sh) ;;
+        77) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/System.sh) ;;
+        78) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/firewall.sh) ;;
+        79) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/fail2ban.sh) ;;
+        80) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/rsynctd.sh) ;;
+        81) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/crontab.sh) ;;
+        82) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/group.sh) ;;
+        83) bash <(curl -sL kejilion.sh) ;;
+        84) bash <(curl -fsSL ssh_tool.eooce.com) ;;
+        85) wget -O 1keji.sh "https://www.1keji.net" && chmod +x 1keji.sh && ./1keji.sh ;;
+        86) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/Alpinetool/main/Alpine.sh) ;;
+        87) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/oracle/main/oracle.sh) ;;
+        89) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/qdgit.sh) ;;
+        90) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/nat.sh) ;;
+        91) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/toy/main/vpstg.sh) ;;
+        92) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/toy/main/dl.sh) ;;
+        93) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/toy/main/html.sh) ;;
+        94) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/toy/main/tuapi.sh) ;;
+        95) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/app-store/main/nzagent.sh) ;;
+        96) sudo systemctl stop komari-agent && sudo systemctl disable komari-agent && sudo rm -f /etc/systemd/system/komari-agent.service && sudo systemctl daemon-reload && sudo rm -rf /opt/komari /var/log/komari ;;
         88)
             echo -e "${yellow}正在更新脚本...${reset}"
             # 下载最新版本覆盖本地脚本

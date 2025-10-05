@@ -230,8 +230,13 @@ show_sub_menu() {
             printf "${red}▶${reset} ${green}%02d %s${reset}\n" "$num" "$name"
             map+=("$num")
         done
-        echo -ne "${red}请输入要执行的编号${yellow}(00返回主菜单)${yellow}:${reset}"
+        echo -ne "${red}请输入要执行的编号${yellow}(00返回主菜单/X退出)${yellow}:${reset}"
         read -r choice
+
+        # X/x 直接退出脚本
+        if [[ "$choice" =~ ^[xX]$ ]]; then
+            exit 0
+        fi
 
         # 按回车直接刷新菜单
         if [[ -z "$choice" ]]; then
@@ -272,18 +277,6 @@ show_sub_menu() {
 }
 
 
-
-
-# 安装快捷指令
-install_shortcut() {
-    echo -e "${green}创建快捷指令 m 和 M${reset}"
-    local script_path
-    script_path=$(readlink -f "$0")
-    sudo chmod +x "$script_path"
-    sudo ln -sf "$script_path" "$SHORTCUT_PATH"
-    sudo ln -sf "$script_path" "$SHORTCUT_PATH_UPPER"
-    echo -e "${green}安装完成！输入 m 或 M 运行工具箱${reset}"
-}
 
 # 删除快捷指令
 remove_shortcut() {
@@ -430,16 +423,17 @@ execute_choice() {
     esac
 }
 
-# 自动创建快捷指令（只安装一次）
-if [[ ! -f "$SHORTCUT_PATH" || ! -f "$SHORTCUT_PATH_UPPER" ]]; then
-    install_shortcut
-fi
 
 # 主循环
 while true; do
     show_main_menu
     echo -ne "${red}请输入要执行的编号${yellow}(0退出)${yellow}:${reset} "
     read -r main_choice
+
+    # X/x 直接退出脚本
+    if [[ "$main_choice" =~ ^[xX]$ ]]; then
+        exit 0
+    fi
 
     # 按回车刷新菜单
     if [[ -z "$main_choice" ]]; then

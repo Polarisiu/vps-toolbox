@@ -15,7 +15,7 @@ BIN_LINK_DIR="/usr/local/bin"
 if [ ! -f "$SCRIPT_PATH" ]; then
     curl -fsSL -o "$SCRIPT_PATH" "$SCRIPT_URL"
     if [ $? -ne 0 ]; then
-        echo -e "${RED}❌ 下载失败，请检查网络或 URL${RESET}"
+        echo -e "${RED}❌ 安装失败，请检查网络或 URL${RESET}"
         exit 1
     fi
     chmod +x "$SCRIPT_PATH"

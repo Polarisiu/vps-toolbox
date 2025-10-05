@@ -230,7 +230,7 @@ show_sub_menu() {
             printf "${red}▶${reset} ${green}%02d %s${reset}\n" "$num" "$name"
             map+=("$num")
         done
-        echo -ne "${red}请输入要执行的编号${yellow}(00返回主菜单)${yellow}：${reset}"
+        echo -ne "${red}请输入要执行的编号${yellow}(00返回主菜单)${yellow}:${reset}"
         read -r choice
 
         # 按回车直接刷新菜单
@@ -438,7 +438,7 @@ fi
 # 主循环
 while true; do
     show_main_menu
-    echo -ne "${red}请输入要执行的编号${yellow}(0退出)${yellow}：${reset} "
+    echo -ne "${red}请输入要执行的编号${yellow}(0退出)${yellow}:${reset} "
     read -r main_choice
 
     # 按回车刷新菜单

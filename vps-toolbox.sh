@@ -377,7 +377,7 @@ execute_choice() {
         85) wget -O 1keji.sh "https://www.1keji.net" && chmod +x 1keji.sh && ./1keji.sh ;;
         86) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/Alpinetool/main/Alpine.sh) ;;
         87) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/oracle/main/oracle.sh) ;;
-        89) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/qdgit.sh) ;;
+        89) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/toy/main/Github.sh) ;;
         90) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/nat.sh) ;;
         91) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/toy/main/vpstg.sh) ;;
         92) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/toy/main/dl.sh) ;;

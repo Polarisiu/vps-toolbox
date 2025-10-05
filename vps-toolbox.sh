@@ -194,11 +194,11 @@ show_main_menu() {
 
     label_w=8  # 左侧标签宽度
 
-    printf "${BLUE}%s %-*s:${BLUE} %s${re}\n" "💻" $label_w "系统" "$system_name"
-    printf "${BLUE}%s %-*s:${BLUE} %s${re}\n" "🌍" $label_w "时区" "$timezone"
-    printf "${BLUE}%s %-*s:${BLUE} %s${re}\n" "🈯" $label_w "语言" "$language"
-    printf "${BLUE}%s %-*s:${BLUE} %s${re}\n" "🧩" $label_w "架构" "$cpu_arch"
-    printf "${BLUE}%s %-*s:${BLUE} %s${re}\n" "🕒" $label_w "时间" "$datetime"
+    printf "${BLUE}%s %-*s:${yellow} %s${re}\n" "💻" $label_w "系统" "$system_name"
+    printf "${BLUE}%s %-*s:${yellow} %s${re}\n" "🌍" $label_w "时区" "$timezone"
+    printf "${BLUE}%s %-*s:${yellow} %s${re}\n" "🈯" $label_w "语言" "$language"
+    printf "${BLUE}%s %-*s:${yellow} %s${re}\n" "🧩" $label_w "架构" "$cpu_arch"
+    printf "${BLUE}%s %-*s:${yellow} %s${re}\n" "🕒" $label_w "时间" "$datetime"
 
 
     # 绿色下划线

@@ -13,7 +13,6 @@ BIN_LINK_DIR="/usr/local/bin"
 
 # ================== 首次运行自动安装 ==================
 if [ ! -f "$SCRIPT_PATH" ]; then
-    echo -e "${YELLOW}首次运行，正在安装脚本中....${RESET}"
     curl -fsSL -o "$SCRIPT_PATH" "$SCRIPT_URL"
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ 下载失败，请检查网络或 URL${RESET}"

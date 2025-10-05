@@ -107,27 +107,34 @@ show_system_usage() {
     echo -e "${yellow}└$(printf '─%.0s' $(seq 1 $width))┘${reset}"
 }
 
-    # ================== 系统信息 ==================
+# ================== 系统信息 ==================
 
-# 系统名称 (优先 hostnamectl, 再退回 /etc/os-release)
-if command -v hostnamectl >/dev/null 2>&1; then
-    system_name=$(hostnamectl | awk -F': ' '/Operating System/ {print $2}')
-elif [ -f /etc/os-release ]; then
-    system_name=$(grep -E '^PRETTY_NAME=' /etc/os-release | cut -d= -f2 | tr -d '"')
+# 判断是否容器
+if [ -f /proc/1/cgroup ] && grep -qE '(docker|lxc|kubepods)' /proc/1/cgroup; then
+    container_flag=" (Container)"
 else
-    system_name=$(uname -s)  # 最兜底
+    container_flag=""
 fi
 
-# 时区 (优先 timedatectl, 再退回 /etc/timezone 或 date +%Z)
-if command -v timedatectl >/dev/null 2>&1; then
-    timezone=$(timedatectl | awk '/Time zone/ {print $3}')
-elif [ -f /etc/timezone ]; then
+# 系统名称
+if [ -f /etc/os-release ]; then
+    system_name=$(grep -E '^PRETTY_NAME=' /etc/os-release | cut -d= -f2 | tr -d '"')
+else
+    system_name=$(uname -s)
+fi
+system_name="${system_name}${container_flag}"
+
+# 时区
+if [ -f /etc/timezone ]; then
     timezone=$(cat /etc/timezone)
+elif command -v timedatectl >/dev/null 2>&1; then
+    timezone=$(timedatectl | awk '/Time zone/ {print $3}')
 else
     timezone=$(date +%Z)
 fi
+timezone="${timezone} (Non-systemd)"
 
-# 语言（有些容器 LANG 为空，兜底 C.UTF-8）
+# 语言（容器里 LANG 可能为空，兜底 C.UTF-8）
 language=${LANG:-C.UTF-8}
 
 # 架构

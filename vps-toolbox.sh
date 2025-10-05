@@ -441,7 +441,6 @@ while true; do
 
     # 输入 0 退出
     if [[ "$main_choice" == "0" ]]; then
-        echo -e "${yellow}退出${reset}"
         exit 0
     fi
 

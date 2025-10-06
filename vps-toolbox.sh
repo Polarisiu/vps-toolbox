@@ -245,7 +245,7 @@ show_sub_menu() {
             printf "${red}▶${reset} ${yellow}%02d %s${reset}\n" "$num" "$name"
             map+=("$num")
         done
-        echo -ne "${red}请输入要执行的编号${ORANGE}(0返回主菜单/X退出)${ORANGE}:${reset}"
+        echo -ne "${red}请输入要执行的编号${ORANGE}(0返回/X退出)${ORANGE}:${reset}"
         read -r choice
 
         # X/x 直接退出脚本

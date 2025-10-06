@@ -19,6 +19,7 @@ yellow="\033[33m"
 red="\033[31m"
 cyan="\033[36m"
 BLUE="\033[34m"
+ORANGE='\033[38;5;208m'
 
 
 # Ctrl+C 中断保护
@@ -99,12 +100,12 @@ show_system_usage() {
         printf "%-${width}s" "${content_indent}${str}"
     }
 
-    echo -e "${yellow}┌$(printf '─%.0s' $(seq 1 $width))┐${reset}"
+    echo -e "${green}┌$(printf '─%.0s' $(seq 1 $width))┐${reset}"
     echo -e "$(pad_string "${system_status}")"
     echo -e "$(pad_string "${yellow}📊 内存：${mem_used_fmt}/${mem_total_fmt} (${mem_percent})${reset}")"
     echo -e "$(pad_string "${yellow}💽 磁盘：${disk_used_fmt}/${disk_total_fmt} (${disk_used_percent})${reset}")"
     echo -e "$(pad_string "${yellow} ⚙ CPU ：${cpu_usage}${reset}")"
-    echo -e "${yellow}└$(printf '─%.0s' $(seq 1 $width))┘${reset}"
+    echo -e "${green}└$(printf '─%.0s' $(seq 1 $width))┘${reset}"
 }
 
 # ================== 系统信息 ==================
@@ -134,14 +135,29 @@ else
 fi
 timezone="${timezone} (Non-systemd)"
 
-# 语言（容器里 LANG 可能为空，兜底 C.UTF-8）
-language=${LANG:-C.UTF-8}
 
 # 架构
 cpu_arch=$(uname -m)
 
 # 当前时间
 datetime=$(date "+%Y-%m-%d %H:%M:%S")
+
+# VPS 运行时间
+if [ -f /proc/uptime ]; then
+    uptime_seconds=$(cut -d' ' -f1 /proc/uptime | cut -d. -f1)
+    days=$((uptime_seconds/86400))
+    hours=$(( (uptime_seconds%86400)/3600 ))
+    minutes=$(( (uptime_seconds%3600)/60 ))
+    if [ "$days" -gt 0 ]; then
+        vps_uptime="${days}天${hours}小时${minutes}分钟"
+    elif [ "$hours" -gt 0 ]; then
+        vps_uptime="${hours}小时${minutes}分钟"
+    else
+        vps_uptime="${minutes}分钟"
+    fi
+else
+    vps_uptime=$(uptime -p 2>/dev/null | tr -d ' ' || echo "未知")
+fi
 
 
 
@@ -160,7 +176,7 @@ MAIN_MENU=(
 )
 
 # 二级菜单（编号去掉前导零，显示时格式化为两位数）
-SUB_MENU[1]="1 更新系统|2 系统信息|3 修改ROOT密码|4 配置密钥登录|5 修改SSH端口|6 修改时区|7 切换v4V6|8 开放所有端口|9 开启ROOT登录|10 更换系统源|11 DDdebian12|12 DDwindows10|13 DDNAT|14 DD飞牛|15 设置中文|16 修改主机名|17 美化命令|18 VPS重启"
+SUB_MENU[1]="1 更新系统|2 系统信息|3 修改ROOT密码|4 配置密钥登录|5 修改SSH端口|6 修改时区|7 切换v4V6|8 开放所有端口|9 开启ROOT登录|10 更换系统源|11 DDdebian12|12 DDwindows10|13 DDNAT|14 DD飞牛|15 修改语言|16 修改主机名|17 美化命令|18 VPS重启"
 SUB_MENU[2]="19 代理工具|20 FRP管理|21 BBR管理|22 TCP窗口调优|23 WARP|24 SurgeSnell|25 3XUI|26 Hysteria2|27 Reality|28 Realm|29 GOST|30 哆啦A梦转发面板|31 极光面板|32 Xboard|33 WireGuard组网|34 自定义DNS解锁|35 DDNS|36 TCP自动调优|37 一键组网|38 流量监控|39 iperf3"
 SUB_MENU[3]="40 NodeQuality脚本|41 融合怪测试|42 YABS测试|43 网络质量体检脚本|44 简单回程测试|45 完整路由检测|46 流媒体解锁|47 三网延迟测速|48 解锁Instagram音频测试|49 检查25端口开放|50 路由追踪nexttrace"
 SUB_MENU[4]="51 Docker管理|52 DockerCompose管理|53 DockerCompose备份恢复|54 Docker备份恢复"
@@ -196,10 +212,9 @@ show_main_menu() {
 
     printf "${BLUE}%s %-*s:${yellow} %s${re}\n" "💻" $label_w "系统" "$system_name"
     printf "${BLUE}%s %-*s:${yellow} %s${re}\n" "🌍" $label_w "时区" "$timezone"
-    printf "${BLUE}%s %-*s:${yellow} %s${re}\n" "🈯" $label_w "语言" "$language"
     printf "${BLUE}%s %-*s:${yellow} %s${re}\n" "🧩" $label_w "架构" "$cpu_arch"
     printf "${BLUE}%s %-*s:${yellow} %s${re}\n" "🕒" $label_w "时间" "$datetime"
-
+    printf "${BLUE}%s %-*s:${ORANGE} %s${re}\n" "🚀" $label_w "在线" "$vps_uptime"
 
     # 绿色下划线
     echo -e "${green}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${re}"
@@ -230,7 +245,7 @@ show_sub_menu() {
             printf "${red}▶${reset} ${yellow}%02d %s${reset}\n" "$num" "$name"
             map+=("$num")
         done
-        echo -ne "${red}请输入要执行的编号${yellow}(00返回主菜单/X退出)${yellow}:${reset}"
+        echo -ne "${red}请输入要执行的编号${ORANGE}(0返回主菜单/X退出)${ORANGE}:${reset}"
         read -r choice
 
         # X/x 直接退出脚本
@@ -244,10 +259,11 @@ show_sub_menu() {
             continue
         fi
 
-        # 输入 00 返回一级菜单
-        if [[ "$choice" == "00" ]]; then
+        # 输入 0 或 00 返回一级菜单
+        if [[ "$choice" == "0" || "$choice" == "00" ]]; then
             return
         fi
+
         # 只允许数字输入
         if ! [[ "$choice" =~ ^[0-9]+$ ]]; then
             echo -e "${red}无效选项，请输入数字！${reset}"
@@ -255,6 +271,7 @@ show_sub_menu() {
             clear
             continue
         fi
+
         # 判断是否为有效选项
         if [[ ! " ${map[*]} " =~ (^|[[:space:]])$choice($|[[:space:]]) ]]; then
             echo -e "${red}无效选项${reset}"
@@ -275,6 +292,7 @@ show_sub_menu() {
         fi
     done
 }
+
 
 
 
@@ -304,7 +322,7 @@ execute_choice() {
         12) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/window.sh) ;;
         13) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/DDnat.sh) ;;
         14) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/ddfnos.sh) ;;
-        15) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/cnzt.sh) ;;
+        15) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/xgyu.sh) ;;
         16) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/tool/main/home.sh) ;;
         17) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/mhgl.sh) ;;
         18) sudo reboot ;;

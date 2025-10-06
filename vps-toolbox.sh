@@ -445,7 +445,7 @@ execute_choice() {
 # 主循环
 while true; do
     show_main_menu
-    echo -ne "${red}请输入要执行的编号${yellow}(0退出)${yellow}:${reset} "
+    echo -ne "${red}请输入要执行的编号${ORANGE}(0退出)${ORANGE}:${reset} "
     read -r main_choice
 
     # X/x 直接退出脚本

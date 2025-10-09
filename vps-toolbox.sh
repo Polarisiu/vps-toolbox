@@ -342,7 +342,7 @@ execute_choice() {
         32) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/proxy/main/Xboard.sh) ;;
         33) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/proxy/main/wireguard.sh) ;;
         34) bash <(curl -sL https://raw.githubusercontent.com/Polarisiu/tool/main/unlockdns.sh) ;;
-        35) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu//proxy/main/CFDDNS.sh) ;;
+        35) bash <(wget -qO- https://raw.githubusercontent.com/mocchen/cssmeihua/mochen/shell/ddns.sh) ;;
         36) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/tcpyh.sh) ;;
         37) bash <(curl -sL https://raw.githubusercontent.com/ceocok/c.cococ/refs/heads/main/easytier.sh) ;;
         38) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/toy/main/traffic.sh) ;;

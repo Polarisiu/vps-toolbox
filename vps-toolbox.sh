@@ -183,7 +183,7 @@ SUB_MENU[4]="51 Docker管理|52 DockerCompose管理|53 DockerCompose备份恢复
 SUB_MENU[5]="55 应用管理|56 面板管理|57 监控管理|58 视频下载工具|59 镜像加速|60 异次元数卡|61 小雅全家桶|62 qbittorrent"
 SUB_MENU[6]="63 NGINX V4反代|64 NGINX V6反代|65 Caddy反代|66 NginxProxyManager面板|67 雷池WAF"
 SUB_MENU[7]="68 系统清理|69 系统备份恢复|70 本地备份|71 一键重装系统|72 系统组件|73 开发环境|74 添加SWAP|75 DNS管理|76 工作区管理|77 系统监控|78 防火墙管理|79 Fail2ban|80 远程备份|81 定时任务|82 集群管理"
-SUB_MENU[8]="83 科技lion|84 老王工具箱|85 一点科技|87 酷雪云脚本"
+SUB_MENU[8]="83 科技lion|84 老王工具箱|85 一点科技|86 BBRv3优化脚本|87 酷雪云脚本"
 SUB_MENU[9]="89 Alpine系统管理|90 甲骨文工具|91 github同步|92 NAT小鸡|93 VPSTG通知|94 脚本短链|95 网站部署|96 关闭V1SSH|97 卸载哪吒Agent |98 卸载komariAgent"
 SUB_MENU[10]="88 更新脚本|99 卸载工具箱"
 
@@ -393,6 +393,7 @@ execute_choice() {
         83) bash <(curl -sL kejilion.sh) ;;
         84) bash <(curl -fsSL ssh_tool.eooce.com) ;;
         85) wget -O 1keji.sh "https://www.1keji.net" && chmod +x 1keji.sh && ./1keji.sh ;;
+        86) bash <(curl -fsSL "https://raw.githubusercontent.com/Eric86777/vps-tcp-tune/main/install-alias.sh?$(date +%s)") ;;
         87) bash <(curl -sL https://cdn.kxy.ovh/kxy.sh) ;;
         89) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/Alpinetool/main/Alpine.sh) ;;
         90) bash <(curl -fsSL https://raw.githubusercontent.com/Polarisiu/oracle/main/oracle.sh) ;;
